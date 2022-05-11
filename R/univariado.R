@@ -136,12 +136,12 @@ descr(data$traslado)
 # Personalicemos la tabla
 
 descr(data$traslado,
-      show = c("n", "mean", "sd", "md", "range"))
+      show = c("label", "n", "mean", "sd", "md", "range"))
 
 # Con kable
 
 descr(data$traslado,
-      show = c("n", "mean", "sd", "md", "range")) %>% 
+      show = c("label", "n", "mean", "sd", "md", "range")) %>% 
   kable(format = "pipe")
 
 # Presentemos dos variables

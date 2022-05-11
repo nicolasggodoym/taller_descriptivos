@@ -41,23 +41,79 @@ frq(data$sexo,
     sort.frq = "asc") 
 ```
 
-### Con kableExtra
+### Con kable
 
 ```{r}
 frq(data$sexo,
     show.na = F,
+    out = "viewer",
     encoding = "UTF-8",
     sort.frq = "asc") %>% 
-  as.data.frame() %>% #Transformamos en dataframe para trabajar con dplyr 
-  select(Sexo = val, 
-         "F. absoluta" = frq,
-         "F. relativa" = raw.prc,
-         "F. rel. acumulada" = cum.prc) %>% 
-  mutate_at(vars("F. relativa", "F. rel. acumulada"),
-            ~(paste0(., "%"))) %>% #Incorporamos porcentaje %
-  kable(caption = "Distribucion de la variable sexo",
-      position = "center") %>% 
+  kable(caption = "Distribución de sexo",
+        col.names = c("Valor", 
+                      "Etiqueta",
+                      "F. absoluta",
+                      "F. relativa",
+                      "F. relativa (valida)",
+                      "F. rel. acumulada"))
+```
+
+### Con kable y dplyr
+
+```{r}
+data %>%
+  select(sexo, quintil) %>% 
+  frq(show.na = F,
+      out = "viewer",
+      encoding = "UTF-8",
+      sort.frq = "asc") %>% 
+  kable(caption = "Distribución de sexo y quintil",
+        col.names = c("Valor", 
+                      "Etiqueta",
+                      "F. absoluta",
+                      "F. relativa",
+                      "F. relativa (valida)",
+                      "F. rel. acumulada"))
+```
+
+### Con kableExtra
+```{r}
+data %>%
+  select(sexo, quintil) %>% 
+  frq(show.na = F,
+      out = "viewer",
+      encoding = "UTF-8",
+      sort.frq = "asc") %>% 
+  kable(caption = "Distribución de sexo y quintil",
+        col.names = c("Valor", 
+                      "Etiqueta",
+                      "F. absoluta",
+                      "F. relativa",
+                      "F. relativa (valida)",
+                      "F. rel. acumulada"),
+        position = "center") %>% 
   kable_classic(full_width = F, html_font = "Cambria") 
+```
+
+### Con dplyr, kable y kableExtra
+
+```{r}
+frq(data$sexo,
+    show.na = F,
+    out = "viewer",
+    encoding = "UTF-8",
+    sort.frq = "asc") %>% 
+  as.data.frame() %>% 
+  select(val, frq, raw.prc, cum.prc) %>% #Seleccionamos columnas de interés
+  mutate_at(vars(ends_with("prc")), 
+                 ~(paste(., "%"))) %>% #Incorporamos porcentaje
+  kable(caption = "Distribución de sexo",
+        col.names = c("Sexo", 
+                      "F. absoluta",
+                      "F. relativa",
+                      "F. rel. acumulada"),
+        position = "center") %>% 
+  kable_classic(full_width = F, html_font = "Cambria")
 ```
 
 ## Tabla de MTC con descr() 
@@ -73,6 +129,14 @@ descr(data$traslado,
       show = c("label", "n", "mean", "sd", "md", "range"))
 ```
 
+### Con kable
+
+```{r}
+descr(data$traslado,
+      show = c("label", "n", "mean", "sd", "md", "range")) %>% 
+  kable()
+```
+
 ### Presentemos dos variables
 
 ```{r}
@@ -81,21 +145,53 @@ data %>%
   descr(show = c("label", "n", "mean", "sd", "md", "range"))
 ```
 
+### Con dplyr y kable
+
+```{r}
+data %>% 
+  select(traslado, serv_nr_ds) %>% 
+  descr(show = c("label", "n", "mean", "sd", "md", "range")) %>% 
+  kable(caption = "MTC para tiempo de traslado y de trabajo no remunerado",
+        col.names = c("Variable",
+                      "Etiqueta",
+                      "n", "Media",
+                      "D. estandar",
+                      "Mediana", "Rango"),
+        position = "center")
+```
+
 ### Con kableExtra
 
 ```{r}
 data %>% 
   select(traslado, serv_nr_ds) %>% 
   descr(show = c("label", "n", "mean", "sd", "md", "range")) %>% 
+  kable(format = "html",
+        caption = "MTC para tiempo de traslado y de trabajo no remunerado",
+        col.names = c("Variable",
+                      "Etiqueta",
+                      "n", "Media",
+                      "D. estandar",
+                      "Mediana", "Rango"),
+        position = "center") %>% 
+  kable_classic(full_width = F, html_font = "Cambria")  
+```
+
+### Con dplyr, kable y kableExtra
+
+```{r}
+data %>% 
+  select(traslado, serv_nr_ds) %>% 
+  descr(show = c("label", "n", "mean", "sd", "md", "range")) %>% 
   as.data.frame() %>% 
-  select(Variable = var,
-         Etiqueta = label,
-         Media = mean,
-         "D. estandar" = sd,
-         Mediana = md, 
-         Rango = range) %>% 
-  mutate_at(vars(3, 4), ~(round(., digits = 3))) %>% 
-  kable(caption = "MTC para horas de traslado y de trabajo no remunerado",
+  mutate_at(vars(4, 5), ~(round(., digits = 3))) %>% 
+  kable(format = "html",
+        caption = "MTC para tiempo de traslado y de trabajo no remunerado",
+        col.names = c("Variable",
+                      "Etiqueta",
+                      "n", "Media",
+                      "D. estandar",
+                      "Mediana", "Rango"),
         position = "center") %>% 
   kable_classic(full_width = F, html_font = "Cambria") 
 ```
