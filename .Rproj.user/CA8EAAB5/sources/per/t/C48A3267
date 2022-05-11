@@ -1,27 +1,27 @@
 {
-    "id": "D549F83E",
-    "path": "~/GitHub/taller_descriptivos/R/univariado.R",
-    "project_path": "R/univariado.R",
+    "id": "C48A3267",
+    "path": "~/GitHub/taller_descriptivos/R/procesamiento.R",
+    "project_path": "R/procesamiento.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "1684759108",
     "contents": "",
     "dirty": false,
-    "created": 1652286270340.0,
+    "created": 1652281468759.0,
     "source_on_save": false,
-    "relative_order": 4,
+    "relative_order": 1,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "119,38",
-        "scrollLine": "106"
+        "cursorPosition": "109,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1652299028,
+    "lastKnownWriteTime": 1652298328,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1652299028443,
+    "last_content_update": 1652298328663,
     "read_only": false,
     "read_only_alternatives": []
 }
