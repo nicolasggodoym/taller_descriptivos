@@ -1,0 +1,29 @@
+{
+    "id": "4B120F16",
+    "path": "~/GitHub/taller_descriptivos/R/univariado.Rmd",
+    "project_path": "R/univariado.Rmd",
+    "type": "r_markdown",
+    "hash": "990436639",
+    "contents": "",
+    "dirty": false,
+    "created": 1652290983230.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "96,21",
+        "scrollLine": "84",
+        "working_dir": "project",
+        "last_setup_crc32": "1C1971A7bfb75035"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1652298487,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1652298487798,
+    "read_only": false,
+    "read_only_alternatives": []
+}

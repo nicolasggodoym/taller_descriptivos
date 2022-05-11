@@ -1,0 +1,112 @@
+---
+title: "Taller descriptivos univariados"
+author: "Nicolás Godoy Márquez"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F )
+```
+
+```{r packages}
+pacman::p_load(tidyverse,
+               sjmisc, 
+               sjPlot,
+               ggrepel, #Para evitar solapamientos en grafico
+               kableExtra) #Para tablas
+```
+
+```{r data}
+data = readRDS("output/data/enut.rds")
+```
+ 
+```{r names}
+sjPlot::view_df(data)
+```
+
+## Tabla de frecuencias con frq()
+
+```{r}
+frq(data$sexo)
+```
+
+### Personalicemos la tabla
+
+```{r}
+frq(data$sexo,
+    title = "Distribución de la variable sexo",
+    show.na = F,
+    out = "viewer",
+    encoding = "UTF-8",
+    sort.frq = "asc") 
+```
+
+### Con kableExtra
+
+```{r}
+frq(data$sexo,
+    show.na = F,
+    encoding = "UTF-8",
+    sort.frq = "asc") %>% 
+  as.data.frame() %>% #Transformamos en dataframe para trabajar con dplyr 
+  select(Sexo = val, 
+         "F. absoluta" = frq,
+         "F. relativa" = raw.prc,
+         "F. rel. acumulada" = cum.prc) %>% 
+  mutate_at(vars("F. relativa", "F. rel. acumulada"),
+            ~(paste0(., "%"))) %>% #Incorporamos porcentaje %
+  kable(caption = "Distribucion de la variable sexo",
+      position = "center") %>% 
+  kable_classic(full_width = F, html_font = "Cambria") 
+```
+
+## Tabla de MTC con descr() 
+
+```{r}
+descr(data$traslado)
+```
+
+### Personalicemos la tabla
+
+```{r}
+descr(data$traslado,
+      show = c("label", "n", "mean", "sd", "md", "range"))
+```
+
+### Presentemos dos variables
+
+```{r}
+data %>% 
+  select(traslado, serv_nr_ds) %>% 
+  descr(show = c("label", "n", "mean", "sd", "md", "range"))
+```
+
+### Con kableExtra
+
+```{r}
+data %>% 
+  select(traslado, serv_nr_ds) %>% 
+  descr(show = c("label", "n", "mean", "sd", "md", "range")) %>% 
+  as.data.frame() %>% 
+  select(Variable = var,
+         Etiqueta = label,
+         Media = mean,
+         "D. estandar" = sd,
+         Mediana = md, 
+         Rango = range) %>% 
+  mutate_at(vars(3, 4), ~(round(., digits = 3))) %>% 
+  kable(caption = "MTC para horas de traslado y de trabajo no remunerado",
+        position = "center") %>% 
+  kable_classic(full_width = F, html_font = "Cambria") 
+```
+
+## Likert
+
+```{r}
+plot_likert(data %>% select(starts_with("sat_")),
+                            title = "Niveles de satisfacción con uso del tiempo",
+                            catcount = 5,
+                            reverse.scale = T) +
+  geom_text_repel() # Para no solapar etiquetas
+```
+
