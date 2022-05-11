@@ -114,7 +114,10 @@ data %>%
         position = "center") %>% 
   kable_classic(full_width = F, html_font = "Cambria") 
 
-
+# Exportar manualmente desde el Viewer
+# Export > Save as Image...
+# Definir Directory la carpeta output/fig
+# Dar un nombre al archivo (por ej., kable) 
 
 # Likert ------------------------------------------------------------------
 

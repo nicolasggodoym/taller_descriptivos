@@ -3,7 +3,7 @@
     "path": "~/GitHub/taller_descriptivos/R/univariado.R",
     "project_path": "R/univariado.R",
     "type": "r_source",
-    "hash": "1104978539",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1652286270340.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "111,21",
-        "scrollLine": "103"
+        "cursorPosition": "119,38",
+        "scrollLine": "106"
     },
     "folds": "",
-    "lastKnownWriteTime": 1652298493,
+    "lastKnownWriteTime": 1652299028,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1652298493272,
+    "last_content_update": 1652299028443,
     "read_only": false,
     "read_only_alternatives": []
 }
