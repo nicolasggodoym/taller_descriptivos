@@ -106,7 +106,8 @@ data %>%
                       "F. relativa (valida)",
                       "F. rel. acumulada"),
         position = "center") %>% 
-  kable_classic(full_width = F, html_font = "Cambria") 
+  kable_classic(full_width = F, html_font = "Cambria") %>% 
+  footnote("Elaboración propia en base a ENUT (2015)")
 
 # Con dplyr, kable y kableExtra
 
@@ -126,7 +127,8 @@ frq(data$sexo,
                       "F. relativa",
                       "F. rel. acumulada"),
         position = "center") %>% 
-  kable_classic(full_width = F, html_font = "Cambria") 
+  kable_classic(full_width = F, html_font = "Cambria") %>% 
+  footnote("Elaboración propia en base a ENUT (2015)")
 
 
 # Tabla de MTC con descr() ------------------------------------------------
