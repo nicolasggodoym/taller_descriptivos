@@ -6,6 +6,7 @@
 
 pacman::p_load(tidyverse,
                haven,
+               car,
                sjmisc,
                sjlabelled)
 
@@ -61,17 +62,17 @@ data = data %>%
          sat_cal_tl = t12_1_4, #Satisfacción calidad tiempo libre
          sat_eq = t12_1_5) %>% #Satisfacción equilibrio trabajo y familia
   mutate_all(~(as.numeric(.))) %>% 
-  mutate_at(vars(starts_with("traslado_|sat_")), ~(car::recode(., "96 = NA"))) %>% 
+  mutate_at(vars(starts_with("traslado_|sat_")), ~(car::recode(., recodes = "96 = NA"))) %>% 
   mutate_at(vars(starts_with("sat_")), ~(car::recode(.,
                                                      recodes = c("1 = 'Totalmente insatisf.';
                                                                  2 = 'Insatisf.';
                                                                  3 = 'Ni satisf./a ni insatisf.';
                                                                  4 = 'Satisf.';
                                                                  5 = 'Totalmente satisf.';
-                                                                 85 = NA"), as.factor = T,
+                                                                 c(85, 96) = NA"), as.factor = T,
                                                      levels = c('Totalmente insatisf.',
                                                                 'Insatisf.',
-                                                                'Ni satisf. ni insatisf.',
+                                                                'Ni satisf./a ni insatisf.',
                                                                 'Satisf.',
                                                                 'Totalmente satisf.')))) %>% 
   mutate(sexo = car::recode(.$sexo,
